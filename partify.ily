@@ -77,7 +77,8 @@ lookupPartsByVariableName = ##f
 % Generates the filename for a part to be saved. The partname parameter is the
 % name of the part (as a string).
 #(define (partify-filename partname)
-   (string-append (ly:parser-output-name) " - " partname))
+   ; (string-append (ly:parser-output-name) " - " partname)
+   partname)
 
 
 
@@ -142,7 +143,6 @@ lookupPartsByVariableName = ##f
 #(define (pfy:process-declaration name)
    (let ((filename (partify-filename name))
          (book (pfy:make-book name)))
-    (display "Here we are")
      (ly:book-process book
                       (pfy:default-paper)
                       (pfy:default-layout)
@@ -183,4 +183,3 @@ lookupPartsByVariableName = ##f
 % Converts music into a book containing that music.
 #(define (pfy:music->book music)
    (pfy:score->book (ly:make-score music)))
-   %#{ \book { \score { #part } } #})
