@@ -374,7 +374,15 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     \override DynamicTextSpanner.whiteout = ##t
     \override DynamicTextSpanner.layer = #2
     \override DynamicTextSpanner.font-size = #0
-    \override DynamicTextSpanner.style = #'none
+  }
+  \context {
+    \Voice {
+      \override DynamicTextSpanner.whiteout = ##t
+      \override DynamicTextSpanner.layer = #2
+      \override DynamicTextSpanner.font-size = #0
+      \override DynamicTextSpanner.style = #'none
+      \override DynamicLineSpanner.staff-padding = #1.5
+    }
   }
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
