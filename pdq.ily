@@ -199,13 +199,13 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   footerCenter = \markup \center-column {
     % First Page Footer
     \on-the-fly \first-page {
-      \override #'(font-name . "Yorkten Thin Italic,")
+      \override #'(font-name . "Yorkten Thin, Italic")
       \smaller \fromproperty #'header:copyright
     }
     % Last Page Footer
     \on-the-fly \last-page {
-      \override #'(font-name . "Yorkten Regular,")
-      \fromproperty #'header:tagline
+      \override #'(font-name . "Yorkten Thin,")
+      \pad-to-box #'(0 . 0) #'(0 . 3) \fromproperty #'header:tagline
     }
   }
 
