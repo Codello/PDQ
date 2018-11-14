@@ -112,6 +112,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   %%%%%%%%%%%%%%%%%%%
 
   annotate-spacing = #opt-debug
+  check-consistency = #opt-debug
 
   indent = 15\mm
   ragged-bottom = ##f
@@ -119,6 +120,15 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
 
   print-page-number = ##t
   print-first-page-number = ##f
+  
+  two-sided = #opt-twoside
+
+  %%%%%%%%%%%%%%%%%%%%
+  % Breaking Options %
+  %%%%%%%%%%%%%%%%%%%%
+  % TODO: Move to \partLayout
+  page-breaking = #ly:page-turn-breaking
+  auto-first-page-number = ##t
 
   %%%%%%%%%%%
   % Spacing %
@@ -131,8 +141,9 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   paper-height = #(if opt-din-paper 297 309)
   paper-width = #(if opt-din-paper 210 233)
 
-  top-margin = 12\mm
-  bottom-margin = 16\mm
+  % TODO: Use Scaling Units with Paper Size
+  top-margin = 8\mm
+  bottom-margin = 8\mm
   left-margin = 12\mm
   right-margin = 12\mm
 
@@ -200,12 +211,12 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     % First Page Footer
     \on-the-fly \first-page {
       \override #'(font-name . "Yorkten Thin, Italic")
-      \smaller \fromproperty #'header:copyright
+      \tiny \fromproperty #'header:copyright
     }
     % Last Page Footer
     \on-the-fly \last-page {
       \override #'(font-name . "Yorkten Thin,")
-      \pad-to-box #'(0 . 0) #'(0 . 3) \fromproperty #'header:tagline
+      \pad-to-box #'(0 . 0) #'(0 . 3) \tiny \fromproperty #'header:tagline
     }
   }
 
@@ -401,6 +412,7 @@ partLayout = \layout {
   \context {
     \Staff
     \remove "Instrument_name_engraver"
+    \consists "Page_turn_engraver"
   }
 }
 
