@@ -104,6 +104,9 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pointAndClickOff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDQ Paper %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paper {
@@ -141,7 +144,6 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   paper-height = #(if opt-din-paper 297 309)
   paper-width = #(if opt-din-paper 210 233)
 
-  % TODO: Use Scaling Units with Paper Size
   top-margin = 8\mm
   bottom-margin = 8\mm
   left-margin = 12\mm
@@ -161,7 +163,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     #'((basic-distance . 13)
        (minimum-distance . 10)
        (padding . 2)
-       (stretchability . 12))
+       (stretchability . 10))
 
   %%%%%%%%%
   % Fonts %
