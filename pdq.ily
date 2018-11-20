@@ -2,6 +2,7 @@
 
 #(ly:set-option 'relative-includes #t)
 \include "util.ily"
+\include "elements.ily"
 #(ly:set-option 'relative-includes #f)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Documentation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                          The PDQ LilyPond Stylesheet                         %
@@ -26,18 +27,8 @@
 %            #t.                                                               %
 % - defaultTagline: Tells PDQ to use default tagline instead of a modified     %
 %                   one.                                                       %
-%                                                                              %
-% Modes                                                                        %
-% =====                                                                        %
-% Modes are special commands that heavily modify the appearance of the score.  %
-% Please note that modes modify paper variables and may modify layout          %
-% variables as well. Because of this you should use modes before any other     %
-% custom tweaks, otherwise your changes will be overridden. For the same       %
-% reason only one mode can be active at a time. Only the latest mode will be   %
-% used.                                                                        %
-% The following modes are available:                                           %
-% - \strictMode: Enables strict layout by enabling things ragged bottom pages. %
-%                This mode should only be used for debugging purposes.         %
+% - strict: Enables strict layout by enabling things ragged bottom pages. This %
+%           should only be used for debugging purposes.                        %
 %                                                                              %
 % Layouts                                                                      %
 % =======                                                                      %
@@ -70,6 +61,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 opt-debug = #(get-option 'debug #f)
+opt-strict = #(get-option 'strict #f)
 opt-repeat-title = #(get-option 'repeatTitle #t)
 opt-din-paper = #(get-option 'dinPaper #f)
 opt-twoside = #(get-option 'twoside #t)
@@ -126,12 +118,9 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   
   two-sided = #opt-twoside
 
-  %%%%%%%%%%%%%%%%%%%%
-  % Breaking Options %
-  %%%%%%%%%%%%%%%%%%%%
-  % TODO: Move to \partLayout
-  page-breaking = #ly:page-turn-breaking
-  auto-first-page-number = ##t
+  ragged-right = #opt-strict
+  ragged-bottom = #opt-strict
+  ragged-last-bottom = #opt-strict
 
   %%%%%%%%%%%
   % Spacing %
@@ -159,6 +148,11 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
        (minimum-distance . 3)
        (padding . 3)
        (stretchability . 0))
+  score-markup-spacing =
+    #'((basic-distance . 12)
+       (minimum-distance . 8)
+       (padding . 0)
+       (stretchability . 10))
   % TODO: Add Option to reduce space between systems
   system-system-spacing =
     #'((basic-distance . 13)
@@ -317,10 +311,43 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     }
   }
 
-  scoreTitleMarkup = \markup \column {
-    \fill-line {
-      \abs-fontsize #28
+% TODO: Extract Common Layout into Variables
+  scoreTitleMarkup = \markup \center-column {
+    \vspace #1
+    \sans {
+      \abs-fontsize #20
       \fromproperty #'header:piece
+      
+      \when-property #'header:subpiece {
+        \vspace #0.15
+        \abs-fontsize #14
+        \fromproperty #'header:subpiece
+      }
+      
+      \vspace #-0.25
+      \abs-fontsize #10
+      \fromproperty #'header:subsubpiece
+      
+      \vspace #0.5
+      
+      \fill-line {
+        \null
+
+        \abs-fontsize #11
+        \concat {
+          \fromproperty #'header:composer
+          \when-property #'header:opus {
+            "  " \fromproperty #'header:opus
+          }
+        }
+      }
+      \vspace #-0.3
+      \fill-line {
+        \null
+        \abs-fontsize #8
+        \fromproperty #'header:arranger
+      }
+      \vspace #-1
     }
   }
 }
@@ -410,6 +437,10 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Layouts %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%
+% Orchestral Parts %
+%%%%%%%%%%%%%%%%%%%%
+
 % The part layout can be used to set single voice parts. It should not be used
 % for piano parts.
 partLayout = \layout {
@@ -424,6 +455,26 @@ partLayout = \layout {
     \consists "Page_turn_engraver"
   }
 }
+
+partPaper = \paper {
+  page-breaking = #ly:page-turn-breaking
+  auto-first-page-number = ##t
+}
+
+%%%%%%%%%%%%%%%%%
+% Small Exerpts %
+%%%%%%%%%%%%%%%%%
+
+exerptLayout = \partLayout
+
+exerptPaper = \paper {
+  \partPaper
+  ragged-last-bottom = ##t
+}
+
+%%%%%%%%%%%%%%%
+% Full Scores %
+%%%%%%%%%%%%%%%
 
 % The score layout can be used to set full scores with many voices and staffs.
 scoreLayout = \layout {
@@ -445,14 +496,5 @@ smallScoreLayout = \layout {
     \Score
     skipBars = ##f
   }
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Modes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-strictMode = \paper {
-  ragged-right = ##t
-  ragged-bottom = ##t
-  ragged-last-bottom = ##t
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
