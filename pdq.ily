@@ -159,11 +159,18 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
        (minimum-distance . 3)
        (padding . 3)
        (stretchability . 0))
+  % TODO: Add Option to reduce space between systems
   system-system-spacing =
     #'((basic-distance . 13)
        (minimum-distance . 10)
-       (padding . 2)
+       (padding . 3)
        (stretchability . 10))
+  % TODO: Tweak the following values. Possibly only for dinPaper
+  page-breaking-system-system-spacing =
+    #'((basic-distance . 13)
+        (minimum-distance . 10)
+        (padding . 1)
+        (stretchability . 0))
 
   %%%%%%%%%
   % Fonts %
