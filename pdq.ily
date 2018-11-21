@@ -170,6 +170,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   % Fonts %
   %%%%%%%%%
 
+% TODO: Better Font Management (One Place to Change them All)
   fonts = #(set-global-fonts
     #:music "beethoven"
     #:brace "beethoven"
@@ -213,7 +214,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   footerCenter = \markup \center-column {
     % First Page Footer
     \on-the-fly \first-page {
-      \override #'(font-name . "Yorkten Thin, Italic")
+      \override #'(font-name . "Yorkten Thin Italic,")
       \tiny \fromproperty #'header:copyright
     }
     % Last Page Footer
