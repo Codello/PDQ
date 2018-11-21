@@ -1,0 +1,95 @@
+\version "2.19.65"
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font Families & Sizes %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+copyrightFont = "Yorkten Thin Italic,"
+% TODO: Footer Font Size
+
+taglineFont = "Yorkten Thin,"
+% TODO: Font Size
+
+titleFontSize = #24
+
+pdqInstrumentMarkup = \markup \box \pad-markup #1 {
+  \abs-fontsize #14
+  \fromproperty #'header:instrument
+}
+
+pdqVersionMarkup = \markup \fromproperty #'header:version
+
+pdqBookHeadlineMarkup = \markup \fill-line {
+  \column {
+    \vspace #3
+    \when-property #'header:instrument \pdqInstrumentMarkup
+    \when-not-property #'header:instrument \null
+  }
+
+  \override #'(baseline-skip . 4.5)
+  \center-column {
+    \vspace #0.2
+    \when-property #'header:dedication {
+      \override #'(font-name . "Yorkten Light Italic,")
+      \abs-fontsize #10
+      \fromproperty #'header:dedication
+      \vspace #0.7
+    }
+    \when-not-property #'header:dedication {
+      \vspace #2.2
+    }
+
+    \override #'(font-name . "Yorkten Light,")
+    \abs-fontsize #titleFontSize
+    \fromproperty #'header:title
+
+    \abs-fontsize #17
+    \fromproperty #'header:subtitle
+
+    \vspace #-0.25
+    \abs-fontsize #14
+    \fromproperty #'header:subsubtitle
+  }
+
+  \null
+}
+
+pdqScoreHeadlineMarkup = \markup \fill-line {
+  \null
+  
+  \center-column {
+    \override #'(font-name . "Yorkten Light,")
+    \abs-fontsize #20
+    \fromproperty #'header:piece
+    
+    \when-property #'header:subpiece {
+      \vspace #0.15
+      \abs-fontsize #14
+      \fromproperty #'header:subpiece
+    }
+    
+    \vspace #-0.25
+    \abs-fontsize #10
+    \fromproperty #'header:subsubpiece
+  }
+
+  \null
+}
+
+pdqComposerMarkup = \markup \fill-line {
+  \override #'(font-name . "Yorkten Regular,")
+  \abs-fontsize #18
+  \fromproperty #'header:exerpt
+  
+  \right-column {
+    \abs-fontsize #11
+    \concat {
+      \fromproperty #'header:composer
+      \when-property #'header:opus {
+        "  " \fromproperty #'header:opus
+      }
+    }
+    \vspace #-0.4
+    \abs-fontsize #8
+    \fromproperty #'header:arranger
+  }
+}

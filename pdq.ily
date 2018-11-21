@@ -2,6 +2,7 @@
 
 #(ly:set-option 'relative-includes #t)
 \include "util.ily"
+\include "pdq-header.ily"
 \include "elements.ily"
 #(ly:set-option 'relative-includes #f)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Documentation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -214,33 +215,24 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   footerCenter = \markup \center-column {
     % First Page Footer
     \on-the-fly \first-page {
-      \override #'(font-name . "Yorkten Thin Italic,")
+      \override #(cons 'font-name copyrightFont)
       \tiny \fromproperty #'header:copyright
     }
     % Last Page Footer
     \on-the-fly \last-page {
-      \override #'(font-name . "Yorkten Thin,")
+      \override #(cons 'font-name taglineFont)
       \pad-to-box #'(0 . 0) #'(0 . 3) \tiny \fromproperty #'header:tagline
-    }
-  }
-
-  versionMarkup = \markup \column {
-    \concat {
-      \when-property #'header:version {
-        "Version "
-        \fromproperty #'header:version
-      }
     }
   }
 
   oddFooterMarkup = \markup \sans \fill-line {
     \null
     \footerCenter
-    \versionMarkup
+    \pdqVersionMarkup
   }
 
   evenFooterMarkup = \markup \if-else #opt-twoside \sans \fill-line {
-    \versionMarkup
+    \pdqVersionMarkup
     \footerCenter
     \null
   } \oddFooterMarkup
@@ -251,104 +243,22 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   bookTitleMarkup = \markup \column {
     \vspace #-2.1
     \sans {
-      \fill-line {
-        \column {
-          \vspace #3
-          \when-property #'header:instrument \box \pad-markup #1 {
-            \abs-fontsize #14
-            \fromproperty #'header:instrument
-          }
-          \when-not-property #'header:instrument \null
-        }
-
-        \override #'(baseline-skip . 4.5)
-        \center-column {
-          \vspace #0.2
-          \when-property #'header:dedication {
-            \override #'(font-name . "Yorkten Light Italic,")
-            \abs-fontsize #10
-            \fromproperty #'header:dedication
-            \vspace #0.7
-          }
-          \when-not-property #'header:dedication {
-            \vspace #2.2
-          }
-
-          \override #'(font-name . "Yorkten Light,")
-          \abs-fontsize #24
-          \fromproperty #'header:title
-
-          \abs-fontsize #17
-          \fromproperty #'header:subtitle
-
-          \vspace #-0.25
-          \abs-fontsize #14
-          \fromproperty #'header:subsubtitle
-        }
-
-        \null
-      }
-
+      \pdqBookHeadlineMarkup
       \vspace #1
-
-      \fill-line {
-        \null
-
-        \abs-fontsize #11
-        \concat {
-          \fromproperty #'header:composer
-          \when-property #'header:opus {
-            "  " \fromproperty #'header:opus
-          }
-        }
-      }
-      \vspace #-0.3
-      \fill-line {
-        \null
-        \abs-fontsize #8
-        \fromproperty #'header:arranger
-      }
+      \pdqComposerMarkup
       \vspace #-1
     }
   }
 
 % TODO: Extract Common Layout into Variables
-  scoreTitleMarkup = \markup \center-column {
+% TODO: Movement Layout for Non-Exerpts
+  scoreTitleMarkup = \markup \column {
     \vspace #1
     \sans {
-      \abs-fontsize #20
-      \fromproperty #'header:piece
-      
-      \when-property #'header:subpiece {
-        \vspace #0.15
-        \abs-fontsize #14
-        \fromproperty #'header:subpiece
-      }
-      
-      \vspace #-0.25
-      \abs-fontsize #10
-      \fromproperty #'header:subsubpiece
-      
+      \pdqScoreHeadlineMarkup
       \vspace #0.5
-      
-      \fill-line {
-        \null
-
-        \abs-fontsize #11
-        \concat {
-          \fromproperty #'header:composer
-          \when-property #'header:opus {
-            "  " \fromproperty #'header:opus
-          }
-        }
-      }
-      \vspace #-0.3
-      \fill-line {
-        \null
-        \abs-fontsize #8
-        \fromproperty #'header:arranger
-      }
-      \vspace #-1
+      \pdqComposerMarkup
+      \vspace #-0.5
     }
   }
 }
@@ -469,7 +379,6 @@ partPaper = \paper {
 exerptLayout = \partLayout
 
 exerptPaper = \paper {
-  \partPaper
   ragged-last-bottom = ##t
 }
 
