@@ -16,8 +16,6 @@ pdqInstrumentMarkup = \markup \box \pad-markup #1 {
   \fromproperty #'header:instrument
 }
 
-pdqVersionMarkup = \markup \fromproperty #'header:version
-
 pdqBookHeadlineMarkup = \markup \fill-line {
   \column {
     \vspace #3
@@ -76,10 +74,14 @@ pdqScoreHeadlineMarkup = \markup \fill-line {
 }
 
 pdqComposerMarkup = \markup \fill-line {
-  \override #'(font-name . "Yorkten Regular,")
-  \abs-fontsize #18
+  \abs-fontsize #12
   \fromproperty #'header:exerpt
   
+  \roman
+  \abs-fontsize #24
+  \fromproperty #'header:movement
+  
+  \sans
   \right-column {
     \abs-fontsize #11
     \concat {

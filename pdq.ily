@@ -145,21 +145,21 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
        (padding . 4)
        (stretchability . 0))
   markup-system-spacing =
-    #'((basic-distance . 3)
+    #'((basic-distance . 5)
        (minimum-distance . 3)
-       (padding . 3)
-       (stretchability . 0))
+       (padding . 1.5)
+       (stretchability . 10))
   score-markup-spacing =
     #'((basic-distance . 12)
-       (minimum-distance . 8)
+       (minimum-distance . 6)
        (padding . 0)
-       (stretchability . 10))
+       (stretchability . 60)) % 15
   % TODO: Add Option to reduce space between systems
   system-system-spacing =
     #'((basic-distance . 13)
        (minimum-distance . 10)
        (padding . 3)
-       (stretchability . 10))
+       (stretchability . 30)) % 10
   % TODO: Tweak the following values. Possibly only for dinPaper
   page-breaking-system-system-spacing =
     #'((basic-distance . 13)
@@ -212,28 +212,31 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   %%%%%%%%%%%%%%%%
 
 
-  footerCenter = \markup \center-column {
-    % First Page Footer
-    \on-the-fly \first-page {
-      \override #(cons 'font-name copyrightFont)
-      \tiny \fromproperty #'header:copyright
+  firstPageFooter = \markup \on-the-fly \first-page \fill-line {
+    \left-column {
+      \tiny \fromproperty #'header:publisher
+      \when-property #'header:version {
+        \vspace #-0.25
+        \tiny \fromproperty #'header:version
+      }
     }
-    % Last Page Footer
-    \on-the-fly \last-page {
-      \override #(cons 'font-name taglineFont)
-      \pad-to-box #'(0 . 0) #'(0 . 3) \tiny \fromproperty #'header:tagline
+    
+    \right-column {
+      \tiny \fromproperty #'header:copyright
+      \when-property #'header:tagline {
+        \vspace #-0.25
+        \tiny \fromproperty #'header:tagline
+      }
     }
   }
 
   oddFooterMarkup = \markup \sans \fill-line {
     \null
-    \footerCenter
-    \pdqVersionMarkup
+    \firstPageFooter
   }
 
   evenFooterMarkup = \markup \if-else #opt-twoside \sans \fill-line {
-    \pdqVersionMarkup
-    \footerCenter
+    \firstPageFooter
     \null
   } \oddFooterMarkup
 
@@ -245,18 +248,18 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     \sans {
       \pdqBookHeadlineMarkup
       \vspace #1
-      \pdqComposerMarkup
-      \vspace #-1
+      % TODO: Add Option to include here
+      %\pdqComposerMarkup
+      %\vspace #-1
     }
   }
 
-% TODO: Extract Common Layout into Variables
-% TODO: Movement Layout for Non-Exerpts
   scoreTitleMarkup = \markup \column {
     \vspace #1
     \sans {
+      % TODO: Only include vertical space if markup is present
       \pdqScoreHeadlineMarkup
-      \vspace #0.5
+      \vspace #1
       \pdqComposerMarkup
       \vspace #-0.5
     }
