@@ -3,6 +3,7 @@
 dolce = \markup { \italic "dolce" }
 
 ellipsis = {
+  \once \override MultiMeasureRest.minimum-length = #0
   \once \override MultiMeasureRest.expand-limit = #1
   \once \override MultiMeasureRest.transparent = ##t
   \once \override MultiMeasureRestNumber.layer = #-1
