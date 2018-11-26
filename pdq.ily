@@ -143,7 +143,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     #'((basic-distance . 0)
        (minimum-distance . 0)
        (padding . 1)
-       (stretchability . 30))
+       (stretchability . 5))
   top-system-spacing =
     #'((basic-distance . 12)
        (minimum-distance . 10)
@@ -159,6 +159,9 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
        (minimum-distance . 6)
        (padding . 0)
        (stretchability . 30)) % 60
+  markup-markup-spacing =
+    #'((basic-distance . 10)
+       (padding . 3))
   % TODO: Add Option to reduce space between systems
   system-system-spacing =
     #'((basic-distance . 13)
