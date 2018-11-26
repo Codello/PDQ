@@ -55,9 +55,11 @@ pdqScoreHeadlineMarkup = \markup \fill-line {
   \null
   
   \center-column {
-    \override #'(font-name . "Yorkten Light,")
-    \abs-fontsize #20
-    \fromproperty #'header:piece
+    \when-property #'header:piece {
+      \override #'(font-name . "Yorkten Light,")
+      \abs-fontsize #20
+      \fromproperty #'header:piece
+    }
     
     \when-property #'header:subpiece {
       \vspace #0.15
@@ -65,21 +67,27 @@ pdqScoreHeadlineMarkup = \markup \fill-line {
       \fromproperty #'header:subpiece
     }
     
-    \vspace #-0.25
-    \abs-fontsize #10
-    \fromproperty #'header:subsubpiece
+    \when-property #'header:subsubpiece {
+      \vspace #-0.25
+      \abs-fontsize #10
+      \fromproperty #'header:subsubpiece
+    }
   }
 
   \null
 }
 
 pdqComposerMarkup = \markup \fill-line {
-  \abs-fontsize #12
-  \fromproperty #'header:exerpt
+  \when-property #'header:exerpt {
+    \abs-fontsize #12
+    \fromproperty #'header:exerpt
+  }
   
-  \roman
-  \abs-fontsize #24
-  \fromproperty #'header:movement
+  \when-property #'header:movement {
+    \roman
+    \abs-fontsize #24
+    \fromproperty #'header:movement
+  }
   
   \sans
   \right-column {

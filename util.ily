@@ -3,6 +3,17 @@
 % A type predicate that is always true.
 #(define (any? object) #t)
 
+#(define (andmap f xs)
+  (cond ((null? xs) #t)
+        ((f (car xs)) (andmap f (cdr xs)))
+        (else #f)))
+
+#(define (ormap f xs)
+  (cond ((null? xs) #f)
+        ((f (car xs)) #t)
+        (else (ormap f (cdr xs)))))
+
+
 % The \if-true markup command conditionally outputs markup based on a boolean
 % value.
 #(define-markup-command (if-true layout props predicate markp) (any? markup?)
@@ -33,6 +44,13 @@
   (if (chain-assoc-get symbol props)
       empty-stencil
       (interpret-markup layout props markp)))
+
+% Behaves like \when-property but accepts a list of properties instead of a
+% single property.
+#(define-markup-command (when-some-properties layout props symbols markp) (list? markup?)
+  (if (ormap (lambda (symbol) (chain-assoc-get symbol props)) symbols)
+      (interpret-markup layout props markp)
+      empty-stencil))
 
 % Enables custom tweaks for single grobs.
 #(define ((custom-script-tweaks ls) grob)

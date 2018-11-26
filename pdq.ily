@@ -139,6 +139,11 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   left-margin = 12\mm
   right-margin = 12\mm
 
+  top-markup-spacing =
+    #'((basic-distance . 0)
+       (minimum-distance . 0)
+       (padding . 1)
+       (stretchability . 30))
   top-system-spacing =
     #'((basic-distance . 12)
        (minimum-distance . 10)
@@ -153,7 +158,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     #'((basic-distance . 12)
        (minimum-distance . 6)
        (padding . 0)
-       (stretchability . 60)) % 15
+       (stretchability . 30)) % 60
   % TODO: Add Option to reduce space between systems
   system-system-spacing =
     #'((basic-distance . 13)
@@ -255,13 +260,16 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   }
 
   scoreTitleMarkup = \markup \column {
-    \vspace #1
+    % \vspace #1
     \sans {
-      % TODO: Only include vertical space if markup is present
-      \pdqScoreHeadlineMarkup
-      \vspace #1
-      \pdqComposerMarkup
-      \vspace #-0.5
+      \when-some-properties #'(header:piece header:subpiece header:subsubpiece) {
+        \pdqScoreHeadlineMarkup
+        \vspace #1
+      }
+      \when-some-properties #'(header:exerpt header:movement header:composer header:opus header:arranger) {
+        \pdqComposerMarkup
+        \vspace #-0.5
+      }
     }
   }
 }
@@ -325,6 +333,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     \Staff
     \override NoteHead.font-size = #-0.5
     \override Script.padding = #0.6
+    \accidentalStyle modern
   }
   \context {
     \PianoStaff
@@ -343,6 +352,11 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
       \override DynamicTextSpanner.font-size = #0
       \override DynamicTextSpanner.style = #'none
       \override DynamicLineSpanner.staff-padding = #1.5
+    }
+  }
+  \context {
+    \CueVoice {
+      \override DynamicTextSpanner.style = #'none
     }
   }
 }
