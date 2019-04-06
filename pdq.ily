@@ -148,7 +148,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   markup-system-spacing =
     #'((basic-distance . 5)
        (minimum-distance . 3)
-       (padding . 3)
+       (padding . 1.5)
        (stretchability . 0))
   score-markup-spacing =
     #'((basic-distance . 12)
