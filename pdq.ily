@@ -267,7 +267,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
       }
       \when-some-properties #'(header:exerpt header:movement header:composer header:opus header:arranger) {
         \pdqComposerMarkup
-        \vspace #-0.5
+        % \vspace #-0.5
       }
     }
   }
