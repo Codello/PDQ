@@ -53,20 +53,20 @@ pdqBookHeadlineMarkup = \markup \fill-line {
 
 pdqScoreHeadlineMarkup = \markup \fill-line {
   \null
-  
+
   \center-column {
     \when-property #'header:piece {
       \override #'(font-name . "Yorkten Light,")
       \abs-fontsize #20
       \fromproperty #'header:piece
     }
-    
+
     \when-property #'header:subpiece {
       \vspace #0.15
       \abs-fontsize #14
       \fromproperty #'header:subpiece
     }
-    
+
     \when-property #'header:subsubpiece {
       \vspace #-0.25
       \abs-fontsize #10
@@ -82,13 +82,13 @@ pdqComposerMarkup = \markup \fill-line {
     \abs-fontsize #12
     \fromproperty #'header:exerpt
   }
-  
+
   \when-property #'header:movement {
     \roman
     \abs-fontsize #24
     \fromproperty #'header:movement
   }
-  
+
   \sans
   \right-column {
     \abs-fontsize #11
@@ -98,8 +98,10 @@ pdqComposerMarkup = \markup \fill-line {
         "  " \fromproperty #'header:opus
       }
     }
-    \vspace #-0.4
-    \abs-fontsize #8
-    \fromproperty #'header:arranger
+    \when-property #'header:arranger {
+      \vspace #-0.4
+      \abs-fontsize #8
+      \fromproperty #'header:arranger
+    }
   }
 }

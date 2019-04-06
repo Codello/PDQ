@@ -9,7 +9,7 @@
 %                          The PDQ LilyPond Stylesheet                         %
 %                 A LilyPond stylesheet dedicated to PDQ Bach.                 %
 %                          Created by Kim Wittenburg                           %
-%                              Version 1.0-alpha                               %
+%                               Version 1.0 beta                               %
 %                                                                              %
 % Usage: \include "pdq.ily". That's it.                                        %
 %                                                                              %
@@ -97,10 +97,6 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\pointAndClickOff
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDQ Paper %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paper {
   %%%%%%%%%%%%%%%%%%%
@@ -116,7 +112,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
 
   print-page-number = ##t
   print-first-page-number = ##f
-  
+
   two-sided = #opt-twoside
 
   ragged-right = #opt-strict
@@ -152,7 +148,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   markup-system-spacing =
     #'((basic-distance . 5)
        (minimum-distance . 3)
-       (padding . 1.5)
+       (padding . 3)
        (stretchability . 0))
   score-markup-spacing =
     #'((basic-distance . 12)
@@ -228,7 +224,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
         \tiny \fromproperty #'header:version
       }
     }
-    
+
     \right-column {
       \tiny \fromproperty #'header:copyright
       \when-property #'header:tagline {
@@ -289,6 +285,9 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     %%%%%%%%%
     \override SpacingSpanner.shortest-duration-space = #2.4
     \override Beam.beam-thickness = #0.5
+    quotedCueEventTypes = #'(note-event rest-event tie-event
+                             beam-event tuplet-span-event
+                             dynamic-event slur-event) % Includes Dynamics
 
     %%%%%%%%%%%%%%%%%%%%%%%%%
     % Accidentals and Slurs %
@@ -408,7 +407,7 @@ exerptPaper = \paper {
 
 % The score layout can be used to set full scores with many voices and staffs.
 scoreLayout = \layout {
-  indent = 15\mm
+  indent = 20\mm
   short-indent = 7.5\mm
   \context {
     \Score
@@ -420,7 +419,7 @@ scoreLayout = \layout {
 % multiple but not too many voices and staffs. It is up to you when a score is
 % "small".
 smallScoreLayout = \layout {
-  indent = 15\mm
+  indent = 20\mm
   short-indent = 0\mm
   \context {
     \Score
