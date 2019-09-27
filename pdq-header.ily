@@ -85,7 +85,7 @@ pdqComposerMarkup = \markup \fill-line {
 
   \when-property #'header:movement {
     \roman
-    \abs-fontsize #24
+    \abs-fontsize #22
     \fromproperty #'header:movement
   }
 
