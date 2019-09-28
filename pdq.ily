@@ -50,6 +50,11 @@
 % - \partLayout: Enables a layout that is suitable for single instrument parts %
 %                (but not neccesarily for scores). This includes the skipBars  %
 %                option, removes instrument names etc.                         %
+% - \transposedPartLayout: A variant of the \partLayout that is optimized for  %
+%                          transposed instruments (e.g. french horn or         %
+%                          clarinet). The layout keeps a small indent in order %
+%                          to enable placement of a transposition info in the  %
+%                          instrumentName of a staff.                          %
 % - \scoreLayout: Enables a layout that is suitable for typical scores with    %
 %                 many voices and staffs. This includes for example instrument %
 %                 names and disables skipBars etc.                             %
@@ -402,6 +407,8 @@ transposedPartLayout = \layout {
   }
 }
 
+% This paper is optimized for printing parts. It enables turn based page
+% breaking and adds page numbers.
 partPaper = \paper {
   page-breaking = #ly:page-turn-breaking
   auto-first-page-number = ##t
@@ -411,8 +418,11 @@ partPaper = \paper {
 % Small Exerpts %
 %%%%%%%%%%%%%%%%%
 
+% This layout should be used for small exerpts of music.
 exerptLayout = \partLayout
 
+% This paper should be used for small exerpts of music. It enables a ragged
+% bottom for the last page.
 exerptPaper = \paper {
   ragged-last-bottom = ##t
 }
