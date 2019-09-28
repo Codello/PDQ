@@ -386,6 +386,22 @@ partLayout = \layout {
   }
 }
 
+% This variant of the part layout keeps an initial indent intended to note the
+% transposition of an instrument.
+transposedPartLayout = \layout {
+  indent = 10\mm
+  \context {
+    \Score
+    skipBars = ##t
+  }
+  \context {
+    \Staff
+    \consists "Page_turn_engraver"
+    \override InstrumentName.font-name = "Yorkten Regular,"
+    \override InstrumentName.font-size = #2.5
+  }
+}
+
 partPaper = \paper {
   page-breaking = #ly:page-turn-breaking
   auto-first-page-number = ##t
