@@ -80,7 +80,7 @@ pdqScoreHeadlineMarkup = \markup \fill-line {
 pdqComposerMarkup = \markup \fill-line {
   \when-property #'header:exerpt {
     \abs-fontsize #12
-    \fromproperty #'header:exerpt
+    \replace #'(("-" . " — ")) \fromproperty #'header:exerpt
   }
 
   \when-property #'header:movement {
@@ -95,7 +95,7 @@ pdqComposerMarkup = \markup \fill-line {
     \concat {
       \fromproperty #'header:composer
       \when-property #'header:opus {
-        "  " \fromproperty #'header:opus
+        "  " \replace #'((". " . ".")) \fromproperty #'header:opus
       }
     }
     \when-property #'header:arranger {
