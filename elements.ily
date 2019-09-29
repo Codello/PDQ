@@ -20,7 +20,7 @@ noSignature = {
   \once \set Staff.printKeyCancellation = ##f
 }
 
-forceBarNumber = \once \override Score.BarNumber.break-visibility = #'#(#t #t #t)
+forceBarNumber = \once \override Score.BarNumber.break-visibility = #end-of-line-invisible
 
 staccsOn = #(define-music-function (parser location dots) (number?)
 #{
