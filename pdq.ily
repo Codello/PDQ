@@ -270,6 +270,9 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
         \pdqScoreHeadlineMarkup
         \vspace #1
       }
+      \when-not-property #'header:movement {
+        \vspace #-1.25
+      }
       \when-some-properties #'(header:exerpt header:movement header:composer header:opus header:arranger) {
         \pdqComposerMarkup
         % \vspace #-0.5
@@ -341,6 +344,9 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     \override NoteHead.font-size = #-0.5
     \override Script.padding = #0.6
     \accidentalStyle modern
+    \override MeasureCounter.direction = #UP
+    \override MeasureCounter.font-series = #'bold
+    \override MeasureCounter.font-shape = #'italic
   }
   \context {
     \PianoStaff
@@ -351,6 +357,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     \override DynamicTextSpanner.whiteout = ##t
     \override DynamicTextSpanner.layer = #2
     \override DynamicTextSpanner.font-size = #0
+    \override TextScript.font-shape = #'italic
   }
   \context {
     \Voice {
@@ -359,11 +366,13 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
       \override DynamicTextSpanner.font-size = #0
       \override DynamicTextSpanner.style = #'none
       \override DynamicLineSpanner.staff-padding = #1.5
+      \override TextScript.font-shape = #'italic
     }
   }
   \context {
     \CueVoice {
       \override DynamicTextSpanner.style = #'none
+      % \override TextScript.font-shape = #'italic
     }
   }
 }
@@ -388,6 +397,7 @@ partLayout = \layout {
     \Staff
     \remove "Instrument_name_engraver"
     \consists "Page_turn_engraver"
+    \consists "Measure_counter_engraver"
   }
 }
 
@@ -402,6 +412,7 @@ transposedPartLayout = \layout {
   \context {
     \Staff
     \consists "Page_turn_engraver"
+    \consists "Measure_counter_engraver"
     \override InstrumentName.font-name = "Yorkten Regular,"
     \override InstrumentName.font-size = #2.5
   }
