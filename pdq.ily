@@ -25,7 +25,8 @@
 % - debug: Enables extra debugging output. This should never be set to #t when %
 %          setting the final output. The default is #f.                        %
 % - twoside: Specifies whether to use a double sided layout. The default is    %
-%            #t.                                                               %
+%            #t.      	                                                        %
+% - repeatFooter: Prints the footer not only on the first but on all pages.    %
 % - defaultTagline: Tells PDQ to use default tagline instead of a modified     %
 %                   one.                                                       %
 % - strict: Enables strict layout by enabling things ragged bottom pages. This %
@@ -71,6 +72,7 @@ opt-strict = #(get-option 'strict #f)
 opt-repeat-title = #(get-option 'repeatTitle #t)
 opt-din-paper = #(get-option 'dinPaper #f)
 opt-twoside = #(get-option 'twoside #t)
+opt-repeat-footer = #(get-option 'repeatFooter #f)
 opt-default-tagline = #(get-option 'defaultTagline #f)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -221,7 +223,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   %%%%%%%%%%%%%%%%
 
 
-  firstPageFooter = \markup \on-the-fly \first-page \fill-line {
+  firstPageFooter = \markup \fill-line {
     \left-column {
       \tiny \fromproperty #'header:publisher
       \when-property #'header:version {
@@ -238,6 +240,8 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
       }
     }
   }
+
+  firstPageFooter = \markup \if-else #opt-repeat-footer \firstPageFooter { \on-the-fly \first-page \firstPageFooter }
 
   oddFooterMarkup = \markup \sans \fill-line {
     \null
