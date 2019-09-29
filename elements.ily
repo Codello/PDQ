@@ -1,6 +1,6 @@
 \version "2.19.65"
 
-dolce = \markup { \italic "dolce" }
+dolce = \markup { \italic "dolce" \warn #"The \\dolce command is deprecated." }
 
 ellipsis = {
   \once \override MultiMeasureRest.minimum-length = #0
@@ -22,7 +22,6 @@ noSignature = {
 
 forceBarNumber = \once \override Score.BarNumber.break-visibility = #'#(#t #t #t)
 
-% TODO: Remove Code Duplication
 staccsOn = #(define-music-function (parser location dots) (number?)
 #{
     \override Script #'stencil = #ly:text-interface::print

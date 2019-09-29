@@ -1,5 +1,8 @@
 \version "2.19.65"
 
+escalate-warnings = #(define-void-function (parser location) ()
+                                            (set! ly:warning ly:error))
+
 % A type predicate that is always true.
 #(define (any? object) #t)
 
@@ -13,6 +16,10 @@
         ((f (car xs)) #t)
         (else (ormap f (cdr xs)))))
 
+% A markup command that can be used to emit a warning
+#(define-markup-command (warn layout props text) (string?)
+  (ly:warning text)
+  empty-markup)
 
 % The \if-true markup command conditionally outputs markup based on a boolean
 % value.

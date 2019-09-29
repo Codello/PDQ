@@ -74,6 +74,8 @@ opt-din-paper = #(get-option 'dinPaper #f)
 opt-twoside = #(get-option 'twoside #t)
 opt-repeat-footer = #(get-option 'repeatFooter #f)
 opt-default-tagline = #(get-option 'defaultTagline #f)
+
+#(if opt-debug (escalate-warnings))
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
