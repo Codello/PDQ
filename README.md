@@ -1,30 +1,30 @@
-# LilyLib – LilyPond Library
+# The PDQ LilyPond Stylesheet
 
-This folder does not contain scores but a set of *libraries* for LilyPond. These
-libraries range from small utility functions to full blown stylesheets.
+This is the PDQ LilyPond Stylesheet, a simple to use modern layout for scores and parts.
 
-## Partify
+## Installation
 
-The script `partify.ily` provides some functions that make it possible to write
-multiple parts or scores in a single document and choose the one you want when
-compiling.
+1. Install the OpenLilyPondFont *Beethoven* from [here](https://github.com/OpenLilyPondFonts/beethoven). Make sure that your LilyPond installation can find the font files.
+2. Install the [Yorkten](https://www.fontspring.com/fonts/insigne/yorkten) font on your system.
+3. Clone the PDQ git repository.
 
-*Further documentation can be foud in the source of the script.*
+**Note**: The PDQ stylesheet does not use a standard paper format by default.
 
-## PDQ
+## Usage
 
-`pdq.ily` is a stylesheet for LilyPond. Just include the file and watch your
-scores become beautiful.
+In the most basic case you just include the `pdq.ily` file in your score:
 
-Note that PDQ by default does not use A4 paper format. See the PDQ documentation
-for details.
+```lilypond
+\include "path/to/pdq.ily"
+```
 
-## Util
+The PDQ stylesheet can be customized through some options. Options need to be set before the `pdq.ily` file is loaded. For example to use the A4 paper size:
 
-`util.ily` is a collection of small utility functions. Usually you do not need
-to include this file for your scores but it may be useful when developing a
-library for LilyPond.
+```lilypond
+dinPaper = ##t
+\include "path/to/pdq.ily"
+```
 
-## Engraving Extras
+## Package Contents
 
-This file contains additional engravers.
+Besides the PDQ layout this package also contains some utilities that might be useful when working with bigger projects.

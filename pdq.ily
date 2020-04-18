@@ -9,7 +9,6 @@
 %                          The PDQ LilyPond Stylesheet                         %
 %                 A LilyPond stylesheet dedicated to PDQ Bach.                 %
 %                          Created by Kim Wittenburg                           %
-%                               Version 1.0 beta                               %
 %                                                                              %
 % Usage: \include "pdq.ily". That's it.                                        %
 %                                                                              %

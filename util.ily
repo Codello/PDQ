@@ -82,5 +82,3 @@ escalate-warnings = #(define-void-function (parser location) ()
 #(define (get-option symbol default) (if (defined? symbol)
                                          (eval symbol (current-module))
                                          default))
-
-% TODO: Commad startText / stopText http://lilypond.1069038.n5.nabble.com/Ritardando-and-accelerando-tp171061p171095.html
