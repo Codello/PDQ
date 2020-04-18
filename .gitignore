@@ -12,3 +12,9 @@
 # Mac Cache Files #
 ###################
 .DS_Store
+
+#######################
+# Documentation Files #
+#######################
+/docs/html
+/docs/Working Data

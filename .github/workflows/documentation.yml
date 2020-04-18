@@ -1,0 +1,30 @@
+name: Documentation
+on: push
+
+jobs:
+  build:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup NaturalDocs
+        run: |
+          curl -o naturaldocs.zip https://www.naturaldocs.org/download/natural_docs/2.0.2/Natural_Docs_2.0.2.zip
+          unzip naturaldocs.zip -d .. && rm naturaldocs.zip
+      - uses: actions/checkout@v2
+      - name: Run NaturalDocs
+        run: |
+          mkdir docs/html
+          mono ../Natural\ Docs/NaturalDocs.exe docs
+      - name: Upload HTML Docs
+        uses: actions/upload-artifact@v1
+        with:
+          name: HTML Documentation
+          path: docs/html
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/html
+          user_name: 'GitHub Actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          force_orphan: true
