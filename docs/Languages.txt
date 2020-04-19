@@ -22,10 +22,10 @@ Language: LilyPond
 
    Extensions: ly ily
 
-   Line Comment: %!
-   Block Comment: %{! %}
+   Line Comment: %
+   Block Comment: %{ %}
 
-   Function Prototype Ender: \n
+   Variable Prototype Ender: \n
 
 
 # These settings define the languages Natural Docs knows how to parse.  You

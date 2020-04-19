@@ -1,7 +1,31 @@
+%! File: elements.ily
+%! This file contains definition of typical musical elements that are not contained in
+%! the standard library. The PDQ stylesheet automatically includes this file so all of
+%! this is automatically avaliable when using PDQ.
 \version "2.19.65"
 
-dolce = \markup { \italic "dolce" \warn #"The \\dolce command is deprecated." }
+%!--------------------------------------------------------------------------------------
+%! Group: Musical Functions
+%!--------------------------------------------------------------------------------------
 
+%! Function: ellipsis
+%! --- Prototype
+%! \ellipsis duration
+%! ---
+%! Marks a multi measure rest as an ellipsis. Unlike multi measure rests an ellipsis
+%! does not show its length but is represented as two diagonal lines. This can be used
+%! in exerpts where you might only want to include certain parts of a piece. This only
+%! works with multi measure rests.
+%!
+%! Example:
+%! --- LilyPond
+%! \ellipsis R1*100
+%! ---
+%! This ellipsis would span 100 bars. As the ellipsis uses a MMR internally bar numbers
+%! will resume correclty after the ellipsis.
+%!
+%! Parameters:
+%!   duration - The duration of the ellipsis. Must be a multi measure rest.
 ellipsis = {
   \once \override MultiMeasureRest.minimum-length = #0
   \once \override MultiMeasureRest.expand-limit = #1
@@ -13,6 +37,11 @@ ellipsis = {
   \once \override MultiMeasureRestNumber.text = \markup { \vspace #1 \draw-line #'(6 . 3) \hspace #-5.9 \draw-line #'(6 . 3) }
 }
 
+%! Function: noSignature
+%! --- Prototype
+%! \noSignature
+%! ---
+%! Suppresses the time and key signature at the point where this function is used.
 noSignature = {
   \once \override Staff.TimeSignature.break-visibility = #end-of-line-invisible
   \once \override Staff.KeySignature.break-visibility = #end-of-line-invisible
@@ -20,8 +49,28 @@ noSignature = {
   \once \set Staff.printKeyCancellation = ##f
 }
 
+%! Function: forceBarNumber
+%! --- Prototype
+%! \forceBarNumber
+%! ---
+%! Forces LilyPond to output a bar number in the current bar. This can be very useful in
+%! combination with <ellipsis> to inform the reader at which bar an exerpt continues
+%! after an ellipsis.
 forceBarNumber = \once \override Score.BarNumber.break-visibility = #end-of-line-invisible
 
+%! Function: staccsOn
+%! --- Prototype
+%! \staccsOn number
+%! ---
+%! Begins using multiple staccato marks on every following note. The staccatos will
+%! continue until <staccsOff> is used. This is usually used in combination with tremolo
+%! repeats.
+%!
+%! Parameters:
+%!   number - The number of staccatos to use on each note.
+%!
+%! See Also:
+%!   <staccsUpOn>, <staccsDownOn>, <staccsOff>
 staccsOn = #(define-music-function (parser location dots) (number?)
 #{
     \override Script #'stencil = #ly:text-interface::print
@@ -44,7 +93,22 @@ staccsOn = #(define-music-function (parser location dots) (number?)
          val))
 #})
 
-% TODO: Calculate Staccatissimo Direction automatically (by duplicating existing expressive marks)
+%! Function: staccsUpOn
+%! --- Prototype
+%! \staccsUpOn number
+%! ---
+%! Begins using multiple staccatissimo marks on every following note. The marks will
+%! continue until <staccsOff> is used. This is usually used in combination with tremolo
+%! repeats.
+%!
+%! This function uses staccatissimo pointing upward. To use the downward direction use
+%! <staccsDownOn> instead.
+%!
+%! Parameters:
+%!   number - The number of staccatissimo marks to use on each note.
+%!
+%! See Also:
+%!   <staccsOn>, <staccsDownOn>, <staccsOff>
 staccsUpOn = #(define-music-function (parser location dots) (number?)
 #{
     \override Script #'stencil = #ly:text-interface::print
@@ -67,6 +131,22 @@ staccsUpOn = #(define-music-function (parser location dots) (number?)
          val))
 #})
 
+%! Function: staccsDownOn
+%! --- Prototype
+%! \staccsDownOn number
+%! ---
+%! Begins using multiple staccatissimo marks on every following note. The marks will
+%! continue until <staccsOff> is used. This is usually used in combination with tremolo
+%! repeats.
+%!
+%! This function uses staccatissimo pointing downward. To use the upward direction use
+%! <staccsUpOn> instead.
+%!
+%! Parameters:
+%!   number - The number of staccatissimo marks to use on each note.
+%!
+%! See Also:
+%!   <staccsOn>, <staccsUpOn>, <staccsOff>
 staccsDownOn = #(define-music-function (parser location dots) (number?)
 #{
     \override Script #'stencil = #ly:text-interface::print
@@ -89,6 +169,15 @@ staccsDownOn = #(define-music-function (parser location dots) (number?)
          val))
 #})
 
+%! Function: staccsOff
+%! --- Prototype
+%! \staccsOff
+%! ---
+%! Stops using staccato or staccatissimo marks on each note. Use this after using
+%! <staccsOn>, <staccsUpOn>, or <staccsDownOn>.
+%!
+%! See Also:
+%!   <staccsOn>, <staccsUpOn>, <staccsDownOn>
 staccsOff =
 {
   \revert Script #'stencil
