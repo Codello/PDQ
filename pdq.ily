@@ -217,7 +217,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   %! elements are described next. For a more high-level overview of the possible
   %! configuration regarding headers see the <The PDQ Layout>.
   %!------------------------------------------------------------------------------------
-  
+
   %! Event: headerCenter
   %! At the top of each page the instrument name and book title is displayed.
   headerCenter = \markup {
@@ -342,7 +342,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   %! Group: Context Tweaks
   %! The default PDQ layout tweaks multiple contexts to achieve its layout.
   %!------------------------------------------------------------------------------------
-  
+
   %! Context: Score
   %! The main parts of PDQ's modifications apply to the Score context. Modifications
   %! include:
@@ -392,7 +392,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
          (padding . 1.2)
          (stretchability . 2))
   }
-  
+
   %! Context: Staff
   %! PDQ modifies the Staff context to use modern accidentals as well as matching fonts.
   \context {
@@ -404,24 +404,24 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     \override MeasureCounter.font-series = #'bold
     \override MeasureCounter.font-shape = #'italic
   }
-  
+
   %! Context: PianoStaff
   %! Stems spanning multiple systems are connected.
   \context {
     \PianoStaff
     \consists #Span_stem_engraver
   }
-  
+
   %! Context: Dynamics
   %! Adjusted fonts and better readability.
   \context {
     \Dynamics
-    \override DynamicTextSpanner.whiteout = ##t
+    \override DynamicTextSpanner.whiteout = ##f
     \override DynamicTextSpanner.layer = #2
     \override DynamicTextSpanner.font-size = #0
     \override TextScript.font-shape = #'italic
   }
-  
+
   %! Context: Voice
   %! Adjusted spacing and fonts.
   \context {
@@ -434,7 +434,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
       \override TextScript.font-shape = #'italic
     }
   }
-  
+
   %! Context: CueVoice
   %! Does not display dynamic spanners.
   \context {
@@ -504,7 +504,7 @@ partLayout = \layout {
 %! ---
 %! A variant of the \partLayout that is optimized for transposed instruments (e.g.
 %! french horn or clarinet). The layout keeps a small indent in order to enable
-%! placement of a transposition info in the instrumentName of a staff. 
+%! placement of a transposition info in the instrumentName of a staff.
 %!
 %! %! For transposedPartLayouts it is recommended to also use the <partPaper>.
 transposedPartLayout = \layout {
