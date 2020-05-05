@@ -22,7 +22,7 @@
 %! \ellipsis R1*100
 %! ---
 %! This ellipsis would span 100 bars. As the ellipsis uses a MMR internally bar numbers
-%! will resume correclty after the ellipsis.
+%! will resume correctly after the ellipsis.
 %!
 %! Parameters:
 %!   duration - The duration of the ellipsis. Must be a multi measure rest.
