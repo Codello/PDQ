@@ -112,6 +112,14 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     (#:box (#:pad-to-box '(-2 . 2) '(-2 . 2) (#:hcenter-in 4 (#:vcenter
       (#:bold (#:fontsize 3 (make-markalphabet-markup (1- mark))))))))))
 
+%! Function: format-mark-pdq-numeric
+%! Formats rehearsal marks with numbers instead of letters. The formatter puts every
+%! mark in a square box. The marks are printed quite large for better readability.
+#(define (format-mark-pdq-numeric mark context)
+  (markup
+    (#:box (#:pad-to-box '(-2 . 2) '(-2 . 2) (#:hcenter-in 4 (#:vcenter
+      (#:bold (#:fontsize 3 (number->string (1- mark))))))))))
+
 %!======================================================================================
 %! Section: PDQ Paper
 %! The PDQ stylesheet heavily modifies the LilyPond \paper. This section documents some
@@ -372,6 +380,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     markFormatter = #format-mark-pdq
     \override MetronomeMark.font-size = #1
     \override MetronomeMark.padding = #1.25
+    \override RehearsalMark.padding = #2.8
 
     \override BarLine.space-alist.next-note = #'(semi-fixed-space . 1.75)
 
