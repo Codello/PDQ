@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("ell",["Function"],[["ellipsis",,[[,,,,0,"File:elements.ily:ellipsis"]]]]);

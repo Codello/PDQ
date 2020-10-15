@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("cop",["Variable"],[["copyrightFont",,[[,,,,0,"File:pdq-header.ily:copyrightFont"]]]]);

@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("lay",["Section"],[["Layout",,[[,"PDQ Layout",,,0,"File:pdq.ily:PDQ_Layout"],[,"The PDQ Layout",,,0,"File:pdq-header.ily:The_PDQ_Layout"]]]]);

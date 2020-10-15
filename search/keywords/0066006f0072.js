@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("for",["Function","Information"],[["forceBarNumber",,[[,,,,0,"File:elements.ily:forceBarNumber"]]],["Format",,[[,"The PDQ Paper Format",,,1,"File:pdq.ily:The_PDQ_Paper_Format"]]],["format-mark-pdq",,[[,,,,0,"File:pdq.ily:format-mark-pdq"]]],["format-mark-pdq-numeric",,[[,,,,0,"File:pdq.ily:format-mark-pdq-numeric"]]]]);
