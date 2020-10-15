@@ -60,6 +60,25 @@ opt-strict = #(get-option 'strict #f)
 %! this behavior set the option to #f to suppress the title on subsequent pages.
 opt-repeat-title = #(get-option 'repeatTitle #t)
 
+%! Option: bookComposer
+%! --- Prototype
+%! bookComposer = ##f
+%! ---
+%! Print the composer in the book markup next to the title. For multi-movemement scores
+%! you usually want to set this to #t and set scoreComposer to #f to avoid printing the
+%! composer for each new movement.
+opt-book-composer = #(get-option 'bookComposer #f)
+
+%! Option: scoreComposer
+%! --- Prototype
+%! scoreComposer = ##t
+%! ---
+%! Print the composer in the score markup. This is the default. This prints the composer
+%! before every score. While this is preferred for single scores or for multi-composer
+%! books you might want to disable this option if you are engraving multiple scores from
+%! the same piece.
+opt-score-composer = #(get-option 'scoreComposer #t)
+
 %! Option: twoside
 %! --- Prototype
 %! twoside = ##t
@@ -303,9 +322,10 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     \sans {
       \pdqBookHeadlineMarkup
       \vspace #1
-      % TODO: Add Option to include here
-      %\pdqComposerMarkup
-      %\vspace #-1
+      \if-true #opt-book-composer \when-some-properties #'(header:exerpt header:movement header:composer header:opus header:arranger) {
+        \pdqComposerMarkup
+        \vspace #-0.5
+      }
     }
   }
 
@@ -321,7 +341,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
       \when-not-property #'header:movement {
         \vspace #-1.25
       }
-      \when-some-properties #'(header:exerpt header:movement header:composer header:opus header:arranger) {
+      \if-true #opt-score-composer \when-some-properties #'(header:exerpt header:movement header:composer header:opus header:arranger) {
         \pdqComposerMarkup
         % \vspace #-0.5
       }
@@ -571,6 +591,10 @@ scoreLayout = \layout {
   \context {
     \Score
     skipBars = ##f
+  }
+  \context {
+    \Staff
+    \RemoveEmptyStaves
   }
 }
 
