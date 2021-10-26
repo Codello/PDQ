@@ -1,7 +1,7 @@
 %! File: util.ily
 %! This file contains utility functions in Scheme that can be used to simplify some
 %! advanced tasks in LilyPond.
-\version "2.19.65"
+\version "2.22.1"
 
 
 %!--------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ escalate-warnings = #(define-void-function (parser location) ()
 %! --- Prototype
 %! (define (ormap f xs) ...)
 %! ---
-%! A predicate that returns true iff f returns true for any of the elements in xs. If 
+%! A predicate that returns true iff f returns true for any of the elements in xs. If
 %! xs is empty #f is returned.
 %!
 %! Parameters:
@@ -96,7 +96,7 @@ escalate-warnings = #(define-void-function (parser location) ()
   (cond ((null? xs) #f)
         ((f (car xs)) #t)
         (else (ormap f (cdr xs)))))
-        
+
 %! Function: custom-script-tweaks
 %! --- Prototype
 %! (define ((custom-script-tweaks ls) ...) ...)
@@ -109,8 +109,8 @@ escalate-warnings = #(define-void-function (parser location) ()
 %! Parameters:
 %!   ls - An alist of tweaks. Keys are strings and values are lists of pairs.
 #(define ((custom-script-tweaks ls) grob)
-  (let* ((type (ly:prob-property (assoc-ref (ly:grob-properties grob) 'cause)
-                                  'articulation-type))
+  (let* ((type (ly:prob-property (ly:grob-property grob 'cause)
+                                 'articulation-type))
          (tweaks (assoc-ref ls type)))
     (if tweaks
         (for-each (lambda (x) (ly:grob-set-property! grob (car x) (cdr x))) tweaks)
