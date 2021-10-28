@@ -2,7 +2,7 @@
 %! This file contains definition of typical musical elements that are not contained in
 %! the standard library. The PDQ stylesheet automatically includes this file so all of
 %! this is automatically avaliable when using PDQ.
-\version "2.19.65"
+\version "2.22.1"
 
 %!--------------------------------------------------------------------------------------
 %! Group: Musical Functions
@@ -71,14 +71,14 @@ forceBarNumber = \once \override Score.BarNumber.break-visibility = #end-of-line
 %!
 %! See Also:
 %!   <staccsUpOn>, <staccsDownOn>, <staccsOff>
-staccsOn = #(define-music-function (parser location dots) (number?)
+staccsOn = #(define-music-function (dots) (number?)
 #{
     \override Script #'stencil = #ly:text-interface::print
     \override Script #'text = #(lambda (grob)
       (define (build-lst count)
          (let ((lst (list #:musicglyph "scripts.staccato")))
             (if (> count 1) (append lst '(#:hspace 0.1) (build-lst (- count 1))) lst)))
-      (eval (list markup #:concat (build-lst dots)) (interaction-environment)))
+      (eval (list 'markup #:concat (build-lst dots)) (interaction-environment)))
     \override Script #'X-offset =
     #(lambda (grob)
       (let* ((parent (ly:grob-parent grob X))
@@ -109,14 +109,14 @@ staccsOn = #(define-music-function (parser location dots) (number?)
 %!
 %! See Also:
 %!   <staccsOn>, <staccsDownOn>, <staccsOff>
-staccsUpOn = #(define-music-function (parser location dots) (number?)
+staccsUpOn = #(define-music-function (dots) (number?)
 #{
     \override Script #'stencil = #ly:text-interface::print
     \override Script #'text = #(lambda (grob)
       (define (build-lst count)
          (let ((lst (list #:musicglyph "scripts.dstaccatissimo")))
             (if (> count 1) (append lst '(#:hspace 0.1) (build-lst (- count 1))) lst)))
-      (eval (list markup #:concat (build-lst dots)) (interaction-environment)))
+      (eval (list 'markup #:concat (build-lst dots)) (interaction-environment)))
     \override Script #'X-offset =
     #(lambda (grob)
       (let* ((parent (ly:grob-parent grob X))
@@ -147,14 +147,14 @@ staccsUpOn = #(define-music-function (parser location dots) (number?)
 %!
 %! See Also:
 %!   <staccsOn>, <staccsUpOn>, <staccsOff>
-staccsDownOn = #(define-music-function (parser location dots) (number?)
+staccsDownOn = #(define-music-function (dots) (number?)
 #{
     \override Script #'stencil = #ly:text-interface::print
     \override Script #'text = #(lambda (grob)
       (define (build-lst count)
          (let ((lst (list #:musicglyph "scripts.ustaccatissimo")))
             (if (> count 1) (append lst '(#:hspace 0.1) (build-lst (- count 1))) lst)))
-      (eval (list markup #:concat (build-lst dots)) (interaction-environment)))
+      (eval (list 'markup #:concat (build-lst dots)) (interaction-environment)))
     \override Script #'X-offset =
     #(lambda (grob)
       (let* ((parent (ly:grob-parent grob X))

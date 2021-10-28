@@ -108,7 +108,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
 #(if opt-debug (escalate-warnings))
 
 \header {
-  #(if (not opt-default-tagline) (define tagline "Created with LilyPond"))
+  tagline = #(if (not opt-default-tagline) "Created with LilyPond" '())
 }
 
 
