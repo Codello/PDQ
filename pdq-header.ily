@@ -46,7 +46,7 @@
 %! This file contains the definitions for PDQ header elements. Usually it is not
 %! neccessary to use any of these definitions directly as they are used by the PDQ
 %! stylesheet automatically.
-\version "2.19.65"
+\version "2.24.0"
 
 %!--------------------------------------------------------------------------------------
 %! Group: Variables

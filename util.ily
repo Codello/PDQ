@@ -1,7 +1,7 @@
 %! File: util.ily
 %! This file contains utility functions in Scheme that can be used to simplify some
 %! advanced tasks in LilyPond.
-\version "2.22.1"
+\version "2.24.0"
 
 
 %!--------------------------------------------------------------------------------------

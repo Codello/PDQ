@@ -5,7 +5,7 @@
 %! some functions however in most cases you don't need to use them directly as the
 %! stylesheet can be customized via options.
 %!======================================================================================
-\version "2.19.65"
+\version "2.24.0"
 
 #(ly:set-option 'relative-includes #t)
 \include "util.ily"
@@ -248,7 +248,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   %! Event: headerCenter
   %! At the top of each page the instrument name and book title is displayed.
   headerCenter = \markup {
-    \sans \on-the-fly #not-first-page \concat {
+    \sans \unless \on-first-page \concat {
       \if-true #opt-repeat-title {
         \fromproperty #'header:title
         \when-property #'header:instrument " - "
@@ -262,7 +262,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   %! layouts).
   evenHeaderMarkup = \markup
   \fill-line {
-    \larger \on-the-fly #print-page-number-check-first \fromproperty #'page:page-number-string
+    \larger \if \should-print-page-number \fromproperty #'page:page-number-string
     \headerCenter
     \null
   }
@@ -273,7 +273,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   oddHeaderMarkup = \markup \if-else #opt-twoside \fill-line {
     \null
     \headerCenter
-    \larger \on-the-fly #print-page-number-check-first \fromproperty #'page:page-number-string
+    \larger \if \should-print-page-number \fromproperty #'page:page-number-string
   } \evenHeaderMarkup
 
   %! Event: firstPageFooter
@@ -299,7 +299,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   }
 
   % Repeat the footer on every page if repeatFooter is #t.
-  firstPageFooter = \markup \if-else #opt-repeat-footer \firstPageFooter { \on-the-fly \first-page \firstPageFooter }
+  firstPageFooter = \markup \if-else #opt-repeat-footer \firstPageFooter { \if \on-first-page \firstPageFooter }
 
   %! Event: oddFooterMarkup
   %! On odd pages the footer is displayed on the right.
@@ -397,7 +397,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
     \override Slur.ratio = #0.2
 
     % Marks
-    markFormatter = #format-mark-pdq
+    rehearsalMarkFormatter = #format-mark-pdq
     \override MetronomeMark.font-size = #1
     \override MetronomeMark.padding = #1.25
     \override RehearsalMark.padding = #2.8
