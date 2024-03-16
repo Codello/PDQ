@@ -250,7 +250,8 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
   headerCenter = \markup {
     \sans \unless \on-first-page \concat {
       \if-true #opt-repeat-title {
-        \fromproperty #'header:title
+        \fromproperty #'header:repeattitle
+        \when-not-property #'header:repeattitle \fromproperty #'header:title
         \when-property #'header:instrument " - "
       }
       \fromproperty #'header:instrument

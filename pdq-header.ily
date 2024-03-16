@@ -13,8 +13,10 @@
 %!   title       - The title of the book (required).
 %!   subtitle    - The subtitle of the book (optional, but recommended).
 %!   subsubtitle - A subsubtitle of the book.
+%!   repeattitle - An optional variant of the title that will be used in the header of
+%!                 each page (if repeatTitle is true).
 %!   dedication  - A string containing a dedication of the work. This is displayed above
-%!                the (sub)titles.
+%!                 the (sub)titles.
 %!   instrument  - The name of the instrument the music is for.
 %!   publisher   - The publisher of a work.
 %!   version     - A string identifying the current version of a work.
