@@ -58,6 +58,30 @@ noSignature = {
 %! after an ellipsis.
 forceBarNumber = \once \override Score.BarNumber.break-visibility = #end-of-line-invisible
 
+%! Function: pizz
+%! --- Prototype
+%! \pizz
+%! ---
+%! Markup command that prints a pizzicato mark at the current note.
+%!
+%! Example:
+%! --- LilyPond
+%! c d e^\pizz f
+%! ---
+pizz = \markup { \upright "pizz." }
+
+%! Function: arco
+%! --- Prototype
+%! \pizz
+%! ---
+%! Markup command that prints an arco mark at the current note.
+%!
+%! Example:
+%! --- LilyPond
+%! c d e^\arco f
+%! ---
+arco = \markup { \upright "arco" }
+
 %! Function: staccsOn
 %! --- Prototype
 %! \staccsOn number

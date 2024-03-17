@@ -461,6 +461,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
       \override DynamicTextSpanner.font-size = #0
       \override DynamicTextSpanner.style = #'none
       \override DynamicLineSpanner.staff-padding = #1.5
+      \override TextScript.padding = #1
       \override TextScript.font-shape = #'italic
     }
   }
