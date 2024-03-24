@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("and",["Function"],[["andmap",,[[,,,,0,"File:util.ily:andmap"]]]]);

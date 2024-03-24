@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("str",["Variable"],[["strict",,[[,,,,0,"File:pdq.ily:strict"]]]]);

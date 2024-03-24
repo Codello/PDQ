@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("sco",["Context","Variable","Function","Event"],[["Score",,[[,,,,0,"File:pdq.ily:Score"]]],["scoreComposer",,[[,,,,1,"File:pdq.ily:scoreComposer"]]],["scoreLayout",,[[,,,,2,"File:pdq.ily:scoreLayout"]]],["scoreTitleMarkup",,[[,,,,3,"File:pdq.ily:scoreTitleMarkup"]]]]);

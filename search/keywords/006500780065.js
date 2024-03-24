@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("exe",["Function"],[["exerptLayout",,[[,,,,0,"File:pdq.ily:exerptLayout"]]],["exerptPaper",,[[,,,,0,"File:pdq.ily:exerptPaper"]]]]);

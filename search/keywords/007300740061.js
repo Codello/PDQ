@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("sta",["Function","Context"],[["staccsDownOn",,[[,,,,0,"File:elements.ily:staccsDownOn"]]],["staccsOff",,[[,,,,0,"File:elements.ily:staccsOff"]]],["staccsOn",,[[,,,,0,"File:elements.ily:staccsOn"]]],["staccsUpOn",,[[,,,,0,"File:elements.ily:staccsUpOn"]]],["Staff",,[[,,,,1,"File:pdq.ily:Staff"]]]]);

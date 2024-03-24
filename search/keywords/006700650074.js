@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("get",["Function"],[["get-option",,[[,,,,0,"File:util.ily:get-option"]]]]);

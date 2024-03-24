@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("sty",["Section","Information"],[["Stylesheet",,[[,"The PDQ Stylesheet",,,0,"File:pdq.ily:The_PDQ_Stylesheet"]]],["Styling",,[[,"Styling Options",,,1,"File:pdq.ily:Styling_Options"]]]]);
