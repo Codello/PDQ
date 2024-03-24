@@ -58,6 +58,21 @@ noSignature = {
 %! after an ellipsis.
 forceBarNumber = \once \override Score.BarNumber.break-visibility = #end-of-line-invisible
 
+%! Function: pDolce
+%! --- Prototype
+%! \pDolce
+%! ---
+%! Dynamic command for piano dolce.
+%!
+%! Example:
+%! --- LilyPond
+%! c d e\pDolce f
+%! ---
+pDolce = #(make-dynamic-script
+            (markup #:hspace 5
+                    #:dynamic "p"
+                    #:normal-text #:italic "dolce"))
+
 %! Function: pizz
 %! --- Prototype
 %! \pizz

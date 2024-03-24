@@ -129,7 +129,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
 #(define (format-mark-pdq mark context)
   (markup
     (#:box (#:pad-to-box '(-2 . 2) '(-2 . 2) (#:hcenter-in 4 (#:vcenter
-      (#:bold (#:fontsize 3 (make-markalphabet-markup (1- mark))))))))))
+      (#:bold (#:fontsize 3 (make-markalphabet-markup mark)))))))))
 
 %! Function: format-mark-pdq-numeric
 %! Formats rehearsal marks with numbers instead of letters. The formatter puts every
@@ -137,7 +137,7 @@ opt-default-tagline = #(get-option 'defaultTagline #f)
 #(define (format-mark-pdq-numeric mark context)
   (markup
     (#:box (#:pad-to-box '(-2 . 2) '(-2 . 2) (#:hcenter-in 4 (#:vcenter
-      (#:bold (#:fontsize 3 (number->string (1- mark))))))))))
+      (#:bold (#:fontsize 3 (number->string mark)))))))))
 
 %!======================================================================================
 %! Section: PDQ Paper
